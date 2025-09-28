@@ -1,8 +1,8 @@
-name: Build and Deploy Hexo
+name: Build and Deploy Hexo (Global Install)
 
 on:
   push:
-    branches: [ master ]   # 监听 master 分支
+    branches: [ master ]  # 监听 master 分支
 
 jobs:
   build-deploy:
@@ -12,6 +12,8 @@ jobs:
       # 1. 拉取仓库代码
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 确保完整历史，主题子模块可用
 
       # 2. 安装 Node.js
       - name: Setup Node.js
@@ -19,17 +21,24 @@ jobs:
         with:
           node-version: '18'
 
-      # 3. 安装依赖
+      # 3. 全局安装 Hexo CLI
+      - name: Install Hexo CLI globally
+        run: npm install -g hexo-cli
+
+      # 4. 安装 Hexo 主题和插件依赖
       - name: Install dependencies
         run: npm install
 
-      # 4. 生成静态文件
+      # 5. 生成静态文件
       - name: Generate site
-        run: npx hexo generate
+        run: hexo generate
 
-      # 5. 部署到 gh-pages 分支
+      # 6. 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'ci(deploy): publish site'
