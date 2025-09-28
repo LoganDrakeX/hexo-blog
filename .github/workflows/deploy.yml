@@ -25,15 +25,19 @@ jobs:
       - name: Install Hexo CLI globally
         run: npm install -g hexo-cli
 
-      # 4. 安装 Hexo 主题和插件依赖
+      # 4. 克隆主题
+      - name: Clone NexT theme
+        run: git clone https://github.com/next-theme/hexo-theme-next.git themes/hexo-theme-next
+
+      # 5. 安装 Hexo 主题和插件依赖
       - name: Install dependencies
         run: npm install
 
-      # 5. 生成静态文件
+      # 6. 生成静态文件
       - name: Generate site
         run: hexo generate
 
-      # 6. 部署到 gh-pages 分支
+      # 7. 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
