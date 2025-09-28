@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 欧家欣
+title: LoganDrake
 subtitle: '忠於自己 熱愛生活'
 description: ''
 keywords:
-author: 欧家欣
+author: LoganDrake
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
@@ -91,14 +91,42 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
+include: []
+exclude: []
 ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
+
+# Theme configuration
+theme_config:
+  # 菜单配置
+  menu:
+    home: / || fa fa-home
+    tags: /tags/ || fa fa-tags
+    categories: /categories/ || fa fa-th
+    archives: /archives/ || fa fa-archive
+
+  # 侧边栏头像
+  avatar:
+    url: /images/avatar.jpg
+    rounded: true
+    rotated: false
+
+  # 侧边栏显示设置
+  sidebar:
+    position: left
+    display: post
+
+  # 站点状态统计
+  site_state: true
+
+  # 菜单图标设置
+  menu_settings:
+    icons: true
+    badges: false
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
